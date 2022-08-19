@@ -1,15 +1,15 @@
 @extends('adminlte::page')
 
-@section('title', 'Servicios')
+@section('title', 'Sitios')
 
 @section('content_header')
-    <h1>Registro de servicios</h1>
+    <h1>Registro de sitios</h1>
 @stop
 
 @section('content')
     <div class="card">
         <div class="card-body">
-            <form action="{{route('service.store')}}" enctype="multipart/form-data" method="post">
+            <form action="{{route('site.store')}}" enctype="multipart/form-data" method="post">
                 @csrf
                 @if (session()->has('message'))
                     <div class="alert alert-success alertdismissible fade show" role="alert">
@@ -21,30 +21,43 @@
                     </div>
 
                 @endif
-                <input type="text" placeholder="Ingrese el nombre del servicio.." name="servicio" class="form-control">
-                <small class="text-danger">{{ $errors->first('servicio') }}</small>
-                <label for="">Precio: </label>
-                <input type="number" placeholder="Ingrese el precio del servicio.." name="precio" class="form-control">
-                <small class="text-danger">{{ $errors->first('precio') }}</small>
+                <input type="text" placeholder="municipio.." name="municipio" class="form-control">
+                <small class="text-danger">{{ $errors->first('municipio') }}</small>
+              
+                <input type="text" placeholder="lugar.." name="lugar" class="form-control">
+                <small class="text-danger">{{ $errors->first('lugar') }}</small>
 
+                <input type="text" placeholder="nombre.." name="nombre" class="form-control">
+                <small class="text-danger">{{ $errors->first('nombre') }}</small>
+
+                <input type="text" placeholder="direccion.." name="direccion" class="form-control">
+                <small class="text-danger">{{ $errors->first('direccion') }}</small>
+                
+                <input type="text" placeholder="telefono.." name="telefono" class="form-control">
+                <small class="text-danger">{{ $errors->first('telefono') }}</small>
+                
+                <input type="text" placeholder="correo.." name="correo" class="form-control">
+                <small class="text-danger">{{ $errors->first('correo') }}</small>
+                
                 <i class="far fa-images"></i><input accept="image/*"  onchange="vistaPrevia(event)" type="file"  name="foto" class="form-control">
                 <small class="text-danger">{{ $errors->first('foto') }}</small>
                 
                 <label for="">Vista previa fotografia: </label>
                 <img class="imagen" src="" id="img-foto" alt="" width="200px" height="150px">
 
-                <label for=""></label>
-                <select name="sitio_id" class="form-control" id="">
-                    <option selected="true" disabled="disabled" value="">
-                        seleccione un sitio
-                    </option>
-                    @foreach ($sites as $site)
-                        <option value="{{$site->id}}">{{$site->nombre}}</option>
-                    @endforeach
-                    <small class="text-danger">{{ $errors->first('sitio_id') }}</small>
-                </select>
+                <input type="text" placeholder="descripcion.." name="descripcion" class="form-control">
+                <small class="text-danger">{{ $errors->first('descripcion') }}</small>
 
-                <div class="col-md-12 mt-4 text-center">
+                <input type="text" placeholder="tipo de actividad económica.." name="tipo_actividad" class="form-control">
+                <small class="text-danger">{{ $errors->first('tipo_actividad') }}</small>
+
+                <input type="text" placeholder="Horario de atención.." name="horario_atencion" class="form-control">
+                <small class="text-danger">{{ $errors->first('horario_atencion') }}</small>
+
+                <input type="text" placeholder="estado del sitio (activo 1 | inactivo 2).." name="estado" class="form-control">
+                <small class="text-danger">{{ $errors->first('estado') }}</small>
+
+               <div class="col-md-12 mt-4 text-center">
                     <button type="submit" class="btn btn-secondary">Registrar</button>
                 </div>
 

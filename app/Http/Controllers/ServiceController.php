@@ -15,7 +15,8 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        //
+        $servicios = Service::simplePaginate(3);
+        return view('services.index',compact('servicios'));
     }
 
     /**
@@ -46,7 +47,12 @@ class ServiceController extends Controller
             $servicio = new Service();
             $servicio->servicio = $request->servicio;
             $servicio->precio = $request->precio;
-            $servicio->foto = $request->foto;
+            //1. Llevar esta fotografia como archivo
+            $fotografia=$request->file('foto');
+            // 2. Moverla a la carpeta img y getClientOriginal solo paso el nombre de la foto
+            $fotografia->move('img',$fotografia->getClientOriginalName());
+            //3. Guardando el nombre del archivo
+            $servicio->foto = $fotografia->getClientOriginalName();
             $servicio->sitio_id = $request->sitio_id;
             $servicio->save();
             session()->flash('message','Servicio creado a satisfacción!!..');

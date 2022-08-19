@@ -24,7 +24,7 @@ class SiteController extends Controller
      */
     public function create()
     {
-        //
+        return view('sites.create');
     }
 
     /**
@@ -35,7 +35,38 @@ class SiteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validations = request()->validate([
+            'nombre' => 'required',
+            'direccion' => 'required',
+            'telefono' => 'required',
+        ]);
+
+        if (isset($validations)) {
+            $sites = new Site();
+            $sites->municipio = $request->municipio;
+            $sites->lugar = $request->lugar;
+            $sites->nombre = $request->nombre;
+            $sites->direccion = $request->direccion;
+            $sites->telefono = $request->telefono;
+            $sites->correo = $request->correo;
+            
+            //1. Llevar esta fotografia como archivo
+            $fotografia=$request->file('foto');
+            // 2. Moverla a la carpeta img y getClientOriginal solo paso el nombre de la foto
+            $fotografia->move('img',$fotografia->getClientOriginalName());
+            //3. Guardando el nombre del archivo
+            $sites->foto = $fotografia->getClientOriginalName();
+            $sites->descripcion = $request->descripcion;
+            $sites->tipo_actividad = $request->tipo_actividad;
+            $sites->horario_atencion = $request->horario_atencion;
+            $sites->estado = $request->estado;
+            $sites->save();
+            session()->flash('message','Sitio creado a satisfacción!!..');
+            return redirect()->route('site.create');
+            //return json_encode($sites);
+            /* $request = request()->all();
+            return response()->json($request); */
+        }
     }
 
     /**
@@ -57,7 +88,7 @@ class SiteController extends Controller
      */
     public function edit(Site $site)
     {
-        //
+        return view('site.edit', compact('site'));
     }
 
     /**
