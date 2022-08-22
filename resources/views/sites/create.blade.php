@@ -8,106 +8,154 @@
 
 @section('content')
     <div class="card">
-        <div class="card-body">
-            <form action="{{route('site.store')}}" enctype="multipart/form-data" method="post">
+        <div class="card-boddy">
+            <form action="{{route('site.store')}}" enctype="multipart/form-data" method="POST">
                 @csrf
                 @if (session()->has('message'))
-                    <div class="alert alert-success alertdismissible fade show" role="alert">
-                        {{session('message')}}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            Close
-                            <span ariahidden="true">&times;</span>
-                        </button>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{session('message')}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                @endif
+
+                <div class="row">
+                    <div class="col-md-6 col-lg-6 col-sm-12">
+                        <label for="">Municipio</label>
+                        <input type="text" name="municipio" class="form-control">
+                        <small class="text-danger">{{$errors->first('municipio')}}</small>
                     </div>
 
-                @endif
-                <input type="text" placeholder="municipio.." name="municipio" class="form-control">
-                <small class="text-danger">{{ $errors->first('municipio') }}</small>
-              
-                <input type="text" placeholder="lugar.." name="lugar" class="form-control">
-                <small class="text-danger">{{ $errors->first('lugar') }}</small>
+                    <div class="col-md-6 col-lg-6 col-sm-12">
+                        <label for="">Lugar</label>
+                        <input type="text" name="lugar" class="form-control">
+                        <small class="text-danger">{{$errors->first('lugar')}}</small>
+                    </div>
 
-                <input type="text" placeholder="nombre.." name="nombre" class="form-control">
-                <small class="text-danger">{{ $errors->first('nombre') }}</small>
+                    <div class="col-md-6 col-lg-6 col-sm-12">
+                        <label for="">Nombre</label>
+                        <input type="text" name="nombre" class="form-control">
+                        <small class="text-danger">{{$errors->first('nombre')}}</small>
+                    </div>
 
-                <input type="text" placeholder="direccion.." name="direccion" class="form-control">
-                <small class="text-danger">{{ $errors->first('direccion') }}</small>
-                
-                <input type="text" placeholder="telefono.." name="telefono" class="form-control">
-                <small class="text-danger">{{ $errors->first('telefono') }}</small>
-                
-                <input type="text" placeholder="correo.." name="correo" class="form-control">
-                <small class="text-danger">{{ $errors->first('correo') }}</small>
-                
-                <i class="far fa-images"></i><input accept="image/*"  onchange="vistaPrevia(event)" type="file"  name="foto" class="form-control">
-                <small class="text-danger">{{ $errors->first('foto') }}</small>
-                
-                <label for="">Vista previa fotografia: </label>
-                <img class="imagen" src="" id="img-foto" alt="" width="200px" height="150px">
+                    <div class="col-md-6 col-lg-6 col-sm-12">
+                        <label for="">Direccion</label>
+                        <input type="text" name="direccion" class="form-control">
+                        <small class="text-danger">{{$errors->first('telefono')}}</small>
+                    </div>
 
-                <input type="text" placeholder="descripcion.." name="descripcion" class="form-control">
-                <small class="text-danger">{{ $errors->first('descripcion') }}</small>
+                    <div class="col-md-6 col-lg-6 col-sm-12">
+                        <label for="">Telefono</label>
+                        <input type="text" name="telefono" class="form-control">
+                        <small class="text-danger">{{$errors->first('telefono')}}</small>
+                    </div>
 
-                <input type="text" placeholder="tipo de actividad económica.." name="tipo_actividad" class="form-control">
-                <small class="text-danger">{{ $errors->first('tipo_actividad') }}</small>
+                    <div class="col-md-6 col-lg-6 col-sm-12">
+                        <label for="">Correo</label>
+                        <input type="text" name="correo" class="form-control">
+                        <small class="text-danger">{{$errors->first('correo')}}</small>
+                    </div>
 
-                <input type="text" placeholder="Horario de atención.." name="horario_atencion" class="form-control">
-                <small class="text-danger">{{ $errors->first('horario_atencion') }}</small>
+                    <div class="col-md-6 col-lg-6 col-sm-12">
+                        <label for="">Fotografia:</label><br>
+                        <span class="btn btn-secondary btn-file">
+                            <i class="far fa-images"></i> <input accept="image/*" onchange="vistaPrevia(event)" type="file" name="foto">
+                        </span>
+                        <small class="text-danger">{{$errors->first('fotografia')}}</small>
+                    </div>
+                    
+                    <div class="imagen col-md-6 col-lg-6 col-sm-12">
+                        <label for="">Vista previa fotografia:</label><br>
+                        <img src="" id="img-foto" alt="">
+                    </div> 
 
-                <input type="text" placeholder="estado del sitio (activo 1 | inactivo 2).." name="estado" class="form-control">
-                <small class="text-danger">{{ $errors->first('estado') }}</small>
+                    <div class="col-md-6 col-lg-6 col-sm-12">
+                        <label for="">Descripcion</label>
+                        <input type="text" name="descripcion" class="form-control">
+                        <small class="text-danger">{{$errors->first('descripcion')}}</small>
+                    </div>
 
-               <div class="col-md-12 mt-4 text-center">
-                    <button type="submit" class="btn btn-secondary">Registrar</button>
+                    <div class="col-md-6 col-lg-6 col-sm-12">
+                        <label for="">Tipo de actividad económica</label>
+                        <input type="text" name="tipo_actividad" class="form-control">
+                        <small class="text-danger">{{$errors->first('tipo_actividad')}}</small>
+                    </div>
+
+                    <div class="col-md-6 col-lg-6 col-sm-12">
+                        <label for="">Horario de atencion</label>
+                        <input type="text" name="horario_atencion" class="form-control">
+                        <small class="text-danger">{{$errors->first('horario_atencion')}}</small>
+                    </div>
+
+                    <div class="col-md-6 col-lg-6 col-sm-12">
+                        <label for="">Estado |1 Activo | 2 Desactivado</label>
+                        <input type="text" name="estado" class="form-control">
+                        <small class="text-danger">{{$errors->first('estado')}}</small>
+                    </div>
+
+                    <div class="row">
+                    <div class="col-md-12 mt-4 text-center">
+                        <button type="submit" class="btn btn-secondary">
+                            Guardar
+                        </button>
+                    </div>
+                    </div>
+
+
                 </div>
+            </form>    
+        </div>    
+    </div>    
 
-            </form>
-        </div>
-    </div>
 @stop
 
 @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fontawesome/5.15.3/css/all.min.css">
+<style>
+    
+    .btn-file {
+        position: relative; 
+        overflow: hidden; 
+        width: 100px;
+    }
 
-    <style type="text/css">
-        .btn-file {
-            position: relative;
-            overflow: hidden;
-            width: 100px;
-        }
-        .btn-file input[type=file] {
-            position: absolute;
-            top: 0;
-            right: 0;
-            min-width: 100%;
-            min-height: 100%;
-            font-size: 100px;
-            text-align: right;
-            filter: alpha(opacity=0);
-            opacity: 0;
-            outline: none;
-            background: white;
-            cursor: inherit;
-            display: block;
-        }
-        .btn-file i{
-            font-size:23px;
-        }
-        .imagen img{
-            max-width: 100%;
-            max-height: 30vh;
-        }
-    </style>
+    .btn-file input[type=file] { 
+        position: absolute;
+        top: 0;
+        right: 0;
+        min-width: 100%;
+        min-height: 100%; 
+        font-size: 100px; 
+        text-align: right;
+        filter: alpha(opacity=0);
+        opacity: 0; 
+        outline: none; 
+        background: white; 
+        cursor: inherit; 
+        display: block;
+    }
+
+
+    .btn-file i{
+    font-size:23px;
+    }
+    .imagen img{
+    max-width: 100%;
+    max-height: 30vh;
+}
+</style>
 @stop
 
 @section('js')
     <script> 
-      function ocultarAlerta() {
-            document.querySelector(".alert").style.display = 'none';
-        }
-        setTimeout(ocultarAlerta,3000);
-        let vistaPrevia = ()=>{
+    function ocultarAlerta() { 
+        document.querySelector(".alert").style.display= 'none';
+    }
+    setTimeout(ocultarAlerta,3000); 
+    //funcion de Js para ver la imagen en vista previa
+    let vistaPrevia = ()=>{
             let leerImg = new FileReader();
             let id_img = document.getElementById('img-foto');
 
@@ -118,7 +166,6 @@
             }
 
             leerImg.readAsDataURL(event.target.files[0])
-        }
-            
+    }
     </script>
 @stop

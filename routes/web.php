@@ -19,7 +19,7 @@ Route::get('/', function () {
     return view('layouts.layout');
 });
 
-//Rutas de servicios
+//Rutas de sitios
 Route::resource('site',SiteController::class);
 
 //Rutas de servicios
