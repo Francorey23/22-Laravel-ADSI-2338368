@@ -79,6 +79,7 @@ class SiteController extends Controller
      */
     public function show(Site $site)
     {
+    
        $services = Service::join("sites","services.sitio_id","=","sites.id")
                             ->where("sitio_id",$site->id)
                             ->select("services.servicio","services.precio")

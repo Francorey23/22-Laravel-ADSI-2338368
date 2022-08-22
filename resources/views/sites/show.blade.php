@@ -4,12 +4,20 @@
 
 @section('content_header')
     <h1>Sitio: {{''.$site->nombre}}</h1>
-    <p>Descripcion: {{''.$site->descripcion}}</p>
-   
+    <h2>Descripcion: {{$site->descripcion}}</h2>
 @stop
 
 @section('content')
-    <p>Welcome to this beautiful admin panel.</p>
+    <table class="table table-dark">
+        <tbody>
+            @foreach ($services as $service)
+            <tr>
+                <td>{{$service->servicio}}</td>
+                <td>{{$service->precio}}</td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
 @stop
 
 @section('css')
