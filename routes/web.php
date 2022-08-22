@@ -16,12 +16,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('layouts.layout');
+    return view('welcome');
 });
 
-//Rutas de sitios
-Route::resource('site',SiteController::class);
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
-//Rutas de servicios
-Route::resource('service', ServiceController::class);
+require __DIR__.'/auth.php';
 
+//ruta de sitios
+Route::resource('sites',SiteController::class);
+
+//ruta de servicios
+Route::resource('services', ServiceController::class);
