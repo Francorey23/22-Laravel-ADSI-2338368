@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\IndexController;
+use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SiteController;
 use Illuminate\Support\Facades\Route;
@@ -15,9 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('dashboard');
-});
+Route::get('/',[IndexController::class,'index'])->name('/');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -26,7 +26,13 @@ Route::get('/dashboard', function () {
 require __DIR__.'/auth.php';
 
 //ruta de sitios
-Route::resource('sites',SiteController::class);
+Route::resource('site',SiteController::class);
 
 //ruta de servicios
 Route::resource('services', ServiceController::class);
+
+//ruta para ver una reserva
+Route::get('getSite/{site}',[ReservationController::class,'getSite'])->name('getSite');
+
+//ruta para guardar reservas
+Route::resource('reservation',ReservationController::class);

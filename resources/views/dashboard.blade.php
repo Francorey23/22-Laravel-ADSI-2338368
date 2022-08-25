@@ -36,20 +36,26 @@
                         <img src="images/deporte.jpg" class="img-fluid" alt="Portfolio 01">
                     </div>
                 </div>
+                @foreach ($sites as $site)
                 <div class="col-md-6">
                     <div class="portfolio-container">
                         <div class="portfolio-details">
                             <a href="#">
-                                <h2>Sociedad y cultura Popayán 2021</h2>
+                                <p>{{$site->nombre}}</p>
                             </a>
                             <a href="#">
-                                <p>Nuevos programas para disfrutar</p>
+                                <p>{{$site->descripcion}}</p>
                             </a>
+                            @if (Auth::user())
+                                <a href="{{route('getSite',$site)}}" class="btn btn-secondary" >Reservar</a>
+                            @else
+                                <a href="{{route('login')}}" class="btn btn-secondary" >Iniciar sesión</a>
+                            @endif
                         </div>
-                        <img src="images/cultura.jpg" class="img-fluid" alt="Portfolio 02">
+                        <img src={{asset('img/'.$site->foto)}} class="img-fluid" alt="Portfolio 02">
                     </div>
                 </div>
-
+                @endforeach
             </div>
 
         </div>

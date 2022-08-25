@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Reservation;
+use App\Models\Service;
+use App\Models\Site;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReservationController extends Controller
 {
@@ -12,6 +15,12 @@ class ReservationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function getSite(Site $site){
+        $services = Service::All();
+        return view('reservation.index',compact('site','services'));
+    }
+
     public function index()
     {
         //
@@ -35,7 +44,16 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $reservation = new Reservation();
+        $reservation->fecha = $request->fecha;
+        $reservation->hora = $request->hora;
+        $reservation->numero_personas = $request->numero_personas;
+        $reservation->user_id = Auth::user()->id;
+        $reservation->sitio_id = $request->sitio_id;
+        $reservation->servicio_id = $request->servicio_id;
+        $reservation->save();
+        return redirect()->route('site.create');
+
     }
 
     /**
